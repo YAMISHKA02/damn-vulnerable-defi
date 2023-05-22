@@ -26,10 +26,10 @@ contract TrusterLenderPool is ReentrancyGuard {
         nonReentrant
         returns (bool)
     {
-        uint256 balanceBefore = token.balanceOf(address(this));
+        uint256 balanceBefore = token.balanceOf(address(this));// отмечаем баланс
 
-        token.transfer(borrower, amount);
-        target.functionCall(data);
+        token.transfer(borrower, amount); //отправляем токены тому кто запросил
+        target.functionCall(data); //адрес смарт контракта
 
         if (token.balanceOf(address(this)) < balanceBefore)
             revert RepayFailed();

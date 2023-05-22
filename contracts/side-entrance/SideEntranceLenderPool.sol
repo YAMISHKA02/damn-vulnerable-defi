@@ -26,7 +26,7 @@ contract SideEntranceLenderPool {
         }
         emit Deposit(msg.sender, msg.value);
     }
-
+    
     function withdraw() external {
         uint256 amount = balances[msg.sender];
         
